@@ -5,31 +5,31 @@
 public class CalendarioBasico
 {
     // the dia of the calendar
-    private int dia;
+    private DisplayDosCaracteres dia;
     // the mes of the calendar
-    private int mes;
+    private DisplayDosCaracteres mes;
     // the ano of the calendar
-    private int ano;
+    private DisplayDosCaracteres ano;
 
     /**
      * Constructor for objects of class CalendarioBasico
      */
     public CalendarioBasico()
     {
-        dia = 1;
-        mes = 1;
-        ano = 1;
+        dia = new DisplayDosCaracteres(31);
+        mes = new DisplayDosCaracteres(13);
+        ano = new DisplayDosCaracteres(100);
     }
 
     /**
      * Set the calendar date
      */
-    public void fijarFecha(int actualdia, int actualmes, int actualano)
+    public void fijarFecha(int actualDia, int actualMes, int actualAno)
     {
-        if (actualdia > 0 & actualmes > 0 & actualano >0){
-            dia = actualdia;
-            mes = actualmes;
-            ano = actualano;
+        if (actualDia > 0 & actualMes > 0 & actualAno >0){
+            dia.setValorAlmacenado(actualDia);
+            mes.setValorAlmacenado(actualMes);
+            ano.setValorAlmacenado(actualAno);
         }
         else{
             System.out.println ("You have to input a correct date");
@@ -42,22 +42,7 @@ public class CalendarioBasico
     public String obtenerFecha()
     {
         String date;
-        String diaString;
-        String mesString;
-        String anoString;
-        diaString = String.valueOf(dia);
-        mesString = String.valueOf(mes);
-        anoString = String.valueOf(ano);
-        if (diaString.length() == 1){
-            diaString = "0" + diaString;
-        }
-        if (mesString.length() == 1){
-            mesString = "0" + mesString;
-        }
-        if (anoString.length() == 1){
-            anoString = "0" + anoString;
-        }
-        date = diaString + ("-") + mesString + ("-") + anoString;
+        date = dia.getTextoDelDisplay() + "-" + mes.getTextoDelDisplay() + "-" + ano.getTextoDelDisplay();
         return date;
     }
 
@@ -66,22 +51,22 @@ public class CalendarioBasico
      */
     public void avanzarFecha()
     {
-        if (dia == 30 & mes == 12 & ano == 99){
-            dia = 1;
-            mes = 1;
-            ano = 1;
+        if (dia.getValorAlmacenado() == 30 & mes.getValorAlmacenado() == 12 & ano.getValorAlmacenado() == 99){
+            dia.setValorAlmacenado(1);
+            mes.setValorAlmacenado(1);
+            ano.setValorAlmacenado(1);
         }
-        else if (dia == 30 & mes == 12){
-            dia = 1;
-            mes = 1;
-            ano += 1;
+        else if (dia.getValorAlmacenado() == 30 & mes.getValorAlmacenado() == 12){
+            dia.setValorAlmacenado(1);
+            mes.setValorAlmacenado(1);
+            ano.incrementaValorAlmacenado();
         }
-        else if (dia == 30){
-            dia = 1;
-            mes += 1;
+        else if (dia.getValorAlmacenado() == 30){
+            dia.setValorAlmacenado(1);
+            mes.incrementaValorAlmacenado();
         }
         else{
-            dia += 1;
+            dia.incrementaValorAlmacenado();
         }
     }
 
@@ -91,22 +76,7 @@ public class CalendarioBasico
     public String getString()
     {
         String date;
-        String diaString;
-        String mesString;
-        String anoString;
-        diaString = String.valueOf(dia);
-        mesString = String.valueOf(mes);
-        anoString = String.valueOf(ano);
-        if (diaString.length() == 1){
-            diaString = "0" + diaString;
-        }
-        if (mesString.length() == 1){
-            mesString = "0" + mesString;
-        }
-        if (anoString.length() == 1){
-            anoString = "0" + anoString;
-        }
-        date = diaString + ("-") + mesString + ("-") + ("20") + anoString;
+        date = dia.getTextoDelDisplay() + "-" + mes.getTextoDelDisplay() + "-20" + ano.getTextoDelDisplay();
         return date;
     }
 }
